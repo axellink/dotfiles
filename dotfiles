@@ -1,0 +1,69 @@
+#!/bin/bash
+
+usage() {
+	echo "Usage : $0 [ACTION] [ENV]"
+	echo "        ACTION :"
+	echo "          - deploy : Deploy your dotfiles"
+	echo "          - diff : show a diff between your actual dotfiles and the ones saved"
+	echo "          - update : update your saved dotfiles with your actual dotfiles"
+	echo "        ENV : the environment directory name"
+	echo "Expects to find a file_map file which maps a file to its location in your home"
+	echo "Example : 'i3_config:.config/i3/config'"
+}
+
+# Check we have 2 args
+[ "$#" != "2" ] && usage && exit 1
+
+# Check action args
+case $1 in
+	deploy|update|diff)
+		ACTION=$1
+		;;
+	*)
+		usage && exit 1
+esac
+
+# Check environment
+! [ -d "$2" ] && echo "$1 does not exist" && exit 1
+ENV=$2
+
+! [ -f "file_map" ] && echo "file_map not found" && exit 2
+
+[ -z "$HOME" ] && echo "It seems you are a homeless user !" && exit 3
+
+doDiff() {
+	echo "Diff for $1 :"
+	diff $ENV/$1 $HOME/$2
+}
+
+doDeploy() {
+	echo "Deploying $1 to $HOME/$2"
+	mkdir -p $HOME/$(dirname $2)
+	cp $ENV/$1 $HOME/$2
+}
+
+doUpdate() {
+	echo "Updating $1 from $HOME/$2"
+	cp $HOME/$2 $ENV/$1
+}
+
+while read l; do
+	file=`cut -f1 -d':' <<< $l`
+	dest=`cut -f2 -d':' <<< $l`
+	case $ACTION in
+		deploy)
+			doDeploy $file $dest
+			;;
+		diff)
+			doDiff $file $dest
+			;;
+		update)
+			doUpdate $file $dest
+			;;
+		*)
+			echo "YO WHAT ????" && exit 1
+			;;
+	esac
+done < file_map
+
+exit 0
