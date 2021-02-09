@@ -213,28 +213,26 @@ bar {
 default_border none
 hide_edge_borders none
 
-bindsym $mod+Shift+q exec systemctl poweroff
-
 # Use scratchpad for spotify, keepass and rambox
 set $sp_geo 1920 1061
 set $sp_pos 0 0
 for_window [class="Spotify"] move scratchpad, scratchpad show, move position $sp_pos, resize set $sp_geo, scratchpad show
-for_window [class="Rambox"] move scratchpad, scratchpad show, move position $sp_pos, resize set $sp_geo, scratchpad show
+#for_window [class="Rambox"] move scratchpad, scratchpad show, move position $sp_pos, resize set $sp_geo, scratchpad show
 for_window [class="keepassxc"] move scratchpad, scratchpad show, move position $sp_pos, resize set $sp_geo, scratchpad show
 
 # Show/hide specific scratchpad on specific key
 bindsym $mod+Control+m [instance="spotify"] scratchpad show
-bindsym $mod+Control+r [instance="rambox"] scratchpad show
+#bindsym $mod+Control+r [instance="rambox"] scratchpad show
 bindsym $mod+Control+k [instance="keepassxc"] scratchpad show
 
 # Show/hide any scratchpad
 bindsym $mod+Control+space scratchpad show
 
-# Keep firefox at workspace 10
-assign [class="Firefox"] $ws10
+# Keep firefox at workspace 1
+assign [class="Firefox"] $ws1
 
 # Keep rambox at workspace 10 (laptop screen)
-#assign [class="Rambox"] $ws10
+assign [class="Rambox"] $ws10
 
 exec terminator
 exec firefox

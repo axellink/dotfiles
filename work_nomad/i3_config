@@ -197,8 +197,6 @@ bar {
 default_border none
 hide_edge_borders none
 
-bindsym $mod+Shift+q exec systemctl poweroff
-
 # Use scratchpad for spotify, keepass and rambox
 set $sp_geo 1920 1061
 set $sp_pos 0 0
