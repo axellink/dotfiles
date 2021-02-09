@@ -196,7 +196,7 @@ bar {
 default_border none
 hide_edge_borders none
 
-# Keep firefox at workspace 0
-assign [class="Firefox"] $ws0
+# Keep firefox at workspace 10
+assign [class="Firefox"] $ws10
 
 exec firefox
