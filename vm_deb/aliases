@@ -31,5 +31,6 @@ alias kns='kubens'
 alias l='ls'
 alias ll='ls -l'
 alias lla='ls -la'
+alias llah='ls -lah'
 
 alias k9sro='k9s --readonly'
