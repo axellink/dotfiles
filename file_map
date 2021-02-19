@@ -2,3 +2,4 @@ i3_config:.config/i3/config
 zshrc:.zshrc
 aliases:.aliases
 vimrc:.vimrc
+terminator_config:.config/terminator/config
