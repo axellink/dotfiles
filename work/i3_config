@@ -235,7 +235,6 @@ assign [class="Firefox"] $ws1
 # Keep rambox at workspace 10 (laptop screen)
 assign [class="Rambox"] $ws10
 
-exec terminator
 exec firefox
 exec spotify
 exec rambox
