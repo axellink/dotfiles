@@ -9,10 +9,9 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-exec xrandr --output HDMI-1 --right-of eDP-1
+exec ~/.screenlayout/auto.sh
 exec xcompmgr
 exec pactl set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo
-exec ~/.fehbg
 
 set $mod Mod4
 set $laptop_screen eDP-1
@@ -200,6 +199,19 @@ bindsym $mod+r mode "resize"
 bindsym $mod+x exec i3lock
 bindsym Print exec deepin-screenshot -n -s ~/Images/screenshot/
 
+mode "layout" {
+        bindsym ampersand exec xrandr --output eDP-1 --auto --output HDMI-1 --off
+        bindsym eacute exec xrandr --output eDP-1 --auto --output HDMI-1 --auto --left-of eDP-1
+        bindsym a exec arandr
+		bindsym f exec ~/.fehbg
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+g mode "default"
+}
+bindsym $mod+g mode "layout"
+assign [class="Arandr"] $ws10
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
@@ -214,28 +226,30 @@ bar {
 default_border none
 hide_edge_borders none
 
-# Use scratchpad for spotify, keepass and rambox
-set $sp_geo 1920 1061
-set $sp_pos 0 0
+# Use scratchpad for spotify and keepass
+set $sp_geo 1600 900
+set $cal_geo 1060 400
+set $sp_pos center
 for_window [class="Spotify"] move scratchpad, scratchpad show, move position $sp_pos, resize set $sp_geo, scratchpad show
-#for_window [class="Rambox"] move scratchpad, scratchpad show, move position $sp_pos, resize set $sp_geo, scratchpad show
-for_window [class="keepassxc"] move scratchpad, scratchpad show, move position $sp_pos, resize set $sp_geo, scratchpad show
+for_window [class="KeePassXC"] move scratchpad, scratchpad show, move position $sp_pos, resize set $sp_geo, scratchpad show
+for_window [title="scratch-term"] move scratchpad, scratchpad show, move position $sp_pos, resize set $sp_geo, scratchpad show
+for_window [title="pulsemixer-term"] move scratchpad, scratchpad show, move position $sp_pos, resize set $sp_geo, scratchpad show
+for_window [title="calendar"] move scratchpad, scratchpad show, move position $sp_pos, resize set $cal_geo, scratchpad show
 
 # Show/hide specific scratchpad on specific key
-bindsym $mod+Control+m [instance="spotify"] scratchpad show
-#bindsym $mod+Control+r [instance="rambox"] scratchpad show
-bindsym $mod+Control+k [instance="keepassxc"] scratchpad show
+bindsym $mod+Control+m [instance="spotify"] scratchpad show, move position $sp_pos, resize set $sp_geo
+bindsym $mod+Control+k [instance="keepassxc"] scratchpad show, move position $sp_pos, resize set $sp_geo
+bindsym $mod+Control+t [title="scratch-term"] scratchpad show, move position $sp_pos, resize set $sp_geo, border pixel 5 
+bindsym $mod+Control+p [title="pulsemixer-term"] scratchpad show, move position $sp_pos, resize set $sp_geo, border pixel 5 
+bindsym $mod+Control+c [title="calendar"] scratchpad show, move position $sp_pos, resize set $cal_geo, border pixel 1 
 
 # Show/hide any scratchpad
 bindsym $mod+Control+space scratchpad show
 
-# Keep firefox at workspace 1
-assign [class="Firefox"] $ws1
-
-# Keep rambox at workspace 10 (laptop screen)
-assign [class="Rambox"] $ws10
-
 exec firefox
 exec spotify
-exec rambox
 exec keepassxc
+exec owncloud
+exec terminator -T scratch-term -p scratchpad
+exec terminator -T pulsemixer-term -p pulsemixer
+exec terminator -T calendar -p calendar

@@ -100,6 +100,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export EDITOR=vim
 export GOROOT=/usr/local/go
-export PATH=$GOROOT/bin:$HOME/go/bin:/home/linuxbrew/.linuxbrew/bin:$PATH
+export PATH=$GOROOT/bin:$HOME/go/bin:/home/linuxbrew/.linuxbrew/bin:$HOME/.local/bin:$HOME/.tfenv/bin:$PATH
 
 [ -f ~/.aliases ] && source ~/.aliases
