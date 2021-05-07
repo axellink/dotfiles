@@ -9,13 +9,14 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-exec ~/.screenlayout/auto.sh
+exec xrandr --output eDP-1 --auto --output HDMI-1 --auto --left-of eDP-1 --output DP-1 --auto --rotate right --left-of HDMI-1 && ~/.fehbg
 exec xcompmgr
 exec pactl set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo
 
 set $mod Mod4
 set $laptop_screen eDP-1
 set $wide_screen HDMI-1
+set $vert_screen DP-1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -138,7 +139,7 @@ bindsym $mod+ccedilla workspace number $ws9
 bindsym $mod+agrave workspace number $ws10
 
 # assign workspace to screen
-workspace $ws1 output $wide_screen
+workspace $ws1 output $vert_screen
 workspace $ws2 output $wide_screen
 workspace $ws3 output $wide_screen
 workspace $ws4 output $wide_screen
@@ -200,8 +201,9 @@ bindsym $mod+x exec i3lock
 bindsym Print exec deepin-screenshot -n -s ~/Images/screenshot/
 
 mode "layout" {
-        bindsym ampersand exec xrandr --output eDP-1 --auto --output HDMI-1 --off
-        bindsym eacute exec xrandr --output eDP-1 --auto --output HDMI-1 --auto --left-of eDP-1
+        bindsym ampersand exec xrandr --output eDP-1 --auto --output HDMI-1 --off --output DP-1 --off && ~/.fehbg 1
+        bindsym eacute exec xrandr --output eDP-1 --auto --output HDMI-1 --auto --left-of eDP-1 --output DP-1 --auto --rotate right --left-of HDMI-1 && ~/.fehbg 2
+        bindsym quotedbl exec xrandr --output eDP-1 --auto --output HDMI-1 --off --output DP-1 --auto --rotate right --left-of eDP-1 && ~/.fehbg 3
         bindsym a exec arandr
 		bindsym f exec ~/.fehbg
 
@@ -235,6 +237,7 @@ for_window [class="KeePassXC"] move scratchpad, scratchpad show, move position $
 for_window [title="scratch-term"] move scratchpad, scratchpad show, move position $sp_pos, resize set $sp_geo, scratchpad show
 for_window [title="pulsemixer-term"] move scratchpad, scratchpad show, move position $sp_pos, resize set $sp_geo, scratchpad show
 for_window [title="calendar"] move scratchpad, scratchpad show, move position $sp_pos, resize set $cal_geo, scratchpad show
+for_window [class="Microsoft Teams - Preview"] move scratchpad, scratchpad show, move position $sp_pos, resize set $cal_geo, scratchpad show
 
 # Show/hide specific scratchpad on specific key
 bindsym $mod+Control+m [instance="spotify"] scratchpad show, move position $sp_pos, resize set $sp_geo
@@ -242,9 +245,12 @@ bindsym $mod+Control+k [instance="keepassxc"] scratchpad show, move position $sp
 bindsym $mod+Control+t [title="scratch-term"] scratchpad show, move position $sp_pos, resize set $sp_geo, border pixel 5 
 bindsym $mod+Control+p [title="pulsemixer-term"] scratchpad show, move position $sp_pos, resize set $sp_geo, border pixel 5 
 bindsym $mod+Control+c [title="calendar"] scratchpad show, move position $sp_pos, resize set $cal_geo, border pixel 1 
+bindsym $mod+Control+w [class="Microsoft Teams - Preview"] scratchpad show, move position $sp_pos, resize set $sp_geo
 
 # Show/hide any scratchpad
 bindsym $mod+Control+space scratchpad show
+
+assign [class="Microsoft Teams - Preview"] $ws9
 
 exec firefox
 exec spotify

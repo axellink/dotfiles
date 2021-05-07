@@ -48,3 +48,4 @@ launch_vpn() {
 
 alias vimdate='vim $(date +"%Y-%m-%d")'
 alias cdtmp='cd $(mktemp -d)'
+alias naxsi_deformat="tr '&' '\n' <<< $1"
