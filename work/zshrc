@@ -103,3 +103,4 @@ export GOROOT=/usr/local/go
 export PATH=$GOROOT/bin:$HOME/go/bin:/home/linuxbrew/.linuxbrew/bin:$HOME/.local/bin:$HOME/.tfenv/bin:$PATH
 
 [ -f ~/.aliases ] && source ~/.aliases
+which fortune 2>&1 1>/dev/null && fortune
