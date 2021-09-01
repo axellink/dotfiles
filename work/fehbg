@@ -1,4 +1,4 @@
 #!/bin/bash
 
-[ "$1" == "1" ] && feh --no-fehbg --bg-max '/home/avanzaghi/Images/wp/laptop_wp' 
-[ "$1" == "2" ] && feh --no-fehbg --bg-max '/home/avanzaghi/Images/wp/laptop_wp' --bg-max '/home/avanzaghi/Images/wp/wide_wp' 
+[ "$1" == "1" ] && feh --no-fehbg --bg-max '/home/avanzaghi/Pictures/wp/laptop_wp' 
+[ "$1" == "2" ] && feh --no-fehbg --bg-max '/home/avanzaghi/Pictures/wp/laptop_wp' --bg-max '/home/avanzaghi/Pictures/wp/wide_wp' 
