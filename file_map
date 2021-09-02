@@ -4,3 +4,4 @@ aliases:.aliases
 vimrc:.vimrc
 terminator_config:.config/terminator/config
 fehbg:.fehbg
+bright:.bright.sh

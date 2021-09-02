@@ -71,7 +71,7 @@
     scrollback_infinite = True
     exit_action = restart
     use_custom_command = True
-    custom_command = sudo iftop -i wlo1
+    custom_command = sudo iftop -i wlp59s0
 [layouts]
   [[default]]
     [[[window0]]]

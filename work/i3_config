@@ -9,7 +9,8 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-exec xrandr --output eDP-1-1 --mode 2560x1440 --output HDMI-1 --auto --left-of eDP-1 && ~/.fehbg 2
+exec xrandr --output eDP-1-1 --mode 2560x1440 --output HDMI-1 --auto --left-of eDP-1-1 && ~/.fehbg 2
+exec xrandr --output eDP-1-1 --brightness 0.8
 exec xset s off
 exec xset -dpms
 exec xcompmgr
@@ -229,6 +230,10 @@ bar {
 
 default_border none
 hide_edge_borders none
+
+# Screen brightness management
+bindsym XF86MonBrightnessUp exec ~/.bright.sh Up
+bindsym XF86MonBrightnessDown exec ~/.bright.sh Down
 
 # Use scratchpad for spotify and keepass
 set $sp_geo 2304 1296
