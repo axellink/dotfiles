@@ -47,13 +47,22 @@ launch_vpn() {
 }
 
 alias vimdate='vim $(date +"%Y-%m-%d")'
-alias cdtmp='cd $(mktemp -d)'
 alias naxsi_deformat="tr '&' '\n' <<< $1"
 alias weather='curl "https://wttr.in/Poitiers?lang=fr"'
 
 ipcheck(){
 	dir=/home/avanzaghi/Documents/tools/geo-recon/
-	pushd $dir
+	pushd $dir 1>/dev/null
 	python3 geo-recon.py $*
-	popd
+	popd 1>/dev/null
 }
+
+alias cleartmp='rm -rf /home/avanzaghi/tmp/*'
+
+cdtmp(){
+	suffix=""
+	[ -n "$1" ] && suffix="--suffix=_$1"
+	dir=$(mktemp -d -p ~/tmp $suffix tmp.XXX)
+	cd $dir
+}
+	

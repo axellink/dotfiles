@@ -1,9 +1,11 @@
 [global_config]
+  handle_size = 0
   borderless = True
   title_transmit_bg_color = "#5c3566"
   title_receive_bg_color = "#ad7fa8"
   title_inactive_fg_color = "#5c3566"
   title_inactive_bg_color = "#000000"
+  inactive_color_offset = 0.7056603773584905
 [keybindings]
   full_screen = None
   help = None

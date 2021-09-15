@@ -9,16 +9,16 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-exec xrandr --output eDP-1-1 --mode 2560x1440 --output HDMI-1 --auto --left-of eDP-1-1 && ~/.fehbg 2
-exec xrandr --output eDP-1-1 --brightness 0.8
+exec xrandr --output eDP-1 --mode 2560x1440 --output DP-3 --auto --right-of eDP-1 --output DP-1 --auto --above eDP-1 && ~/.fehbg 3
 exec xset s off
 exec xset -dpms
 exec xcompmgr
-#exec pactl set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo
+exec pactl set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo
 
 set $mod Mod4
-set $laptop_screen eDP-1-1
-set $wide_screen HDMI-1
+set $laptop_screen eDP-1
+set $wide_screen DP-3
+set $hd_screen DP-1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -141,8 +141,8 @@ bindsym $mod+ccedilla workspace number $ws9
 bindsym $mod+agrave workspace number $ws10
 
 # assign workspace to screen
-workspace $ws1 output $wide_screen
-workspace $ws2 output $wide_screen
+workspace $ws1 output $hd_screen
+workspace $ws2 output $laptop_screen
 workspace $ws3 output $wide_screen
 workspace $ws4 output $wide_screen
 workspace $ws5 output $wide_screen
@@ -150,7 +150,7 @@ workspace $ws6 output $wide_screen
 workspace $ws7 output $wide_screen
 workspace $ws8 output $wide_screen
 workspace $ws9 output $wide_screen
-workspace $ws10 output $laptop_screen
+workspace $ws10 output $wide_screen
 
 
 # move focused container to workspace
@@ -199,14 +199,15 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-bindsym $mod+x exec i3lock
+bindsym $mod+x exec i3lock -c 000000 -i ~/Pictures/wp/lock_wp -t
 bindsym Print exec deepin-screenshot -n -s ~/Pictures/screenshot/
 bindsym $mod+n exec firefox --new-window
 bindsym $mod+p exec firefox --private-window
 
 mode "layout" {
-        bindsym ampersand exec xrandr --output eDP-1 --mode 2560x1440 --output HDMI-1 --off --output DP-1 --off && ~/.fehbg 1
-        bindsym eacute exec xrandr --output eDP-1 --mode 2560x1440 --output HDMI-1 --auto --left-of eDP-1 && ~/.fehbg 2
+        bindsym ampersand exec xrandr --output eDP-1 --mode 2560x1440 --output DP-3 --off --output DP-1 --off && ~/.fehbg 1
+        bindsym eacute exec xrandr --output eDP-1 --mode 2560x1440 --output DP-3 --auto --right-of eDP-1 --output DP-1 --off && ~/.fehbg 2
+        bindsym quotedbl exec xrandr --output eDP-1 --mode 2560x1440 --output DP-3 --auto --right-of eDP-1 --output DP-1 --auto --above eDP-1 && ~/.fehbg 3
         bindsym a exec arandr
 		bindsym f exec ~/.fehbg
 
@@ -226,6 +227,7 @@ bar {
 	colors {
 		background #000000CC
 	}
+	font pango:monospace 11
 }
 
 default_border none
@@ -236,7 +238,7 @@ bindsym XF86MonBrightnessUp exec ~/.bright.sh Up
 bindsym XF86MonBrightnessDown exec ~/.bright.sh Down
 
 # Use scratchpad for spotify and keepass
-set $sp_geo 2304 1296
+set $sp_geo 1900 1060
 set $cal_geo 1060 400
 set $sp_pos center
 for_window [class="Spotify"] move scratchpad, scratchpad show, move position $sp_pos, resize set $sp_geo, scratchpad show
@@ -268,6 +270,7 @@ exec teams
 exec discord
 exec keepassxc
 exec owncloud
+exec spotify
 exec terminator -T scratch-term -p scratchpad
 exec terminator -T pulsemixer-term -p pulsemixer
 exec terminator -T calendar -p calendar
