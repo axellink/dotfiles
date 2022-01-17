@@ -9,7 +9,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-exec xrandr --output eDP-1 --mode 2560x1440 --output DP-3 --auto --right-of eDP-1 --output DP-1 --auto --above eDP-1 && ~/.fehbg 3
+exec xrandr --output eDP-1 --mode 2560x1440 --output DP-3 --auto --left-of eDP-1 --output DP-1 --auto --left-of DP-3 && ~/.fehbg 3
 exec xset s off
 exec xset -dpms
 exec xcompmgr
@@ -142,7 +142,7 @@ bindsym $mod+agrave workspace number $ws10
 
 # assign workspace to screen
 workspace $ws1 output $hd_screen
-workspace $ws2 output $laptop_screen
+workspace $ws2 output $wide_screen
 workspace $ws3 output $wide_screen
 workspace $ws4 output $wide_screen
 workspace $ws5 output $wide_screen
@@ -150,7 +150,7 @@ workspace $ws6 output $wide_screen
 workspace $ws7 output $wide_screen
 workspace $ws8 output $wide_screen
 workspace $ws9 output $wide_screen
-workspace $ws10 output $wide_screen
+workspace $ws10 output $laptop_screen
 
 
 # move focused container to workspace
@@ -206,8 +206,8 @@ bindsym $mod+p exec firefox --private-window
 
 mode "layout" {
         bindsym ampersand exec xrandr --output eDP-1 --mode 2560x1440 --output DP-3 --off --output DP-1 --off && ~/.fehbg 1
-        bindsym eacute exec xrandr --output eDP-1 --mode 2560x1440 --output DP-3 --auto --right-of eDP-1 --output DP-1 --off && ~/.fehbg 2
-        bindsym quotedbl exec xrandr --output eDP-1 --mode 2560x1440 --output DP-3 --auto --right-of eDP-1 --output DP-1 --auto --above eDP-1 && ~/.fehbg 3
+        bindsym eacute exec xrandr --output eDP-1 --mode 2560x1440 --output DP-3 --auto --left-of eDP-1 --output DP-1 --off && ~/.fehbg 2
+		bindsym quotedbl exec xrandr --output eDP-1 --mode 2560x1440 --output DP-3 --auto --left-of eDP-1 --output DP-1 --auto --left-of DP-3 && ~/.fehbg 3
         bindsym a exec arandr
 		bindsym f exec ~/.fehbg
 
@@ -247,6 +247,8 @@ for_window [class="KeePassXC"] move scratchpad, scratchpad show, move position $
 for_window [title="scratch-term"] move scratchpad, scratchpad show, move position $sp_pos, resize set $sp_geo, scratchpad show
 for_window [title="iftop-term"] move scratchpad, scratchpad show, move position $sp_pos, resize set $sp_geo, scratchpad show
 for_window [title="pulsemixer-term"] move scratchpad, scratchpad show, move position $sp_pos, resize set $sp_geo, scratchpad show
+for_window [title="btop-term"] move scratchpad, scratchpad show, move position $sp_pos, resize set $sp_geo, scratchpad show
+for_window [title="py-term"] move scratchpad, scratchpad show, move position $sp_pos, resize set $sp_geo, scratchpad show
 for_window [title="calendar"] move scratchpad, scratchpad show, move position $sp_pos, resize set $cal_geo, scratchpad show
 for_window [class="Microsoft Teams - Preview"] move scratchpad, scratchpad show, move position $sp_pos, resize set $sp_geo, scratchpad show
 
@@ -256,6 +258,8 @@ bindsym $mod+Control+d [instance="discord"] scratchpad show, move position $sp_p
 bindsym $mod+Control+k [instance="keepassxc"] scratchpad show, move position $sp_pos, resize set $sp_geo
 bindsym $mod+Control+t [title="scratch-term"] scratchpad show, move position $sp_pos, resize set $sp_geo, border pixel 5 
 bindsym $mod+Control+i [title="iftop-term"] scratchpad show, move position $sp_pos, resize set $sp_geo, border pixel 5 
+bindsym $mod+Control+b [title="btop-term"] scratchpad show, move position $sp_pos, resize set $sp_geo, border pixel 5 
+bindsym $mod+Control+y [title="py-term"] scratchpad show, move position $sp_pos, resize set $sp_geo, border pixel 5 
 bindsym $mod+Control+p [title="pulsemixer-term"] scratchpad show, move position $sp_pos, resize set $sp_geo, border pixel 5 
 bindsym $mod+Control+c [title="calendar"] scratchpad show, move position $sp_pos, resize set $cal_geo, border pixel 1 
 bindsym $mod+Control+w [class="Microsoft Teams - Preview"] scratchpad show, move position $sp_pos, resize set $sp_geo
@@ -275,3 +279,5 @@ exec terminator -T scratch-term -p scratchpad
 exec terminator -T pulsemixer-term -p pulsemixer
 exec terminator -T calendar -p calendar
 exec terminator -T iftop-term -p iftop
+exec terminator -T btop-term -p btop
+exec terminator -T py-term -p python
